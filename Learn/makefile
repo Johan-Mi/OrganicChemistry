@@ -1,6 +1,3 @@
-main: main.o
-	g++ -o main main.o -O3 -std=c++1z
-
-main.o: main.cpp
+main: main.cpp
 	clear
-	g++ -c main.cpp -O3 -std=c++1z -Wall -Wno-sign-compare
+	g++ -o main main.cpp -O3 -std=c++1z -Wall -Wno-unused-result

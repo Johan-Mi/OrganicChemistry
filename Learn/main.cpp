@@ -17,10 +17,9 @@
 void writeWchar(wchar_t c) {
 	mbstate_t state;
 	memset(&state, 0, sizeof(state));
-	char mbbuf[MB_CUR_MAX + 1];
+	char mbbuf[MB_CUR_MAX];
 	size_t nbytes = wcrtomb(mbbuf, c, &state);
-	mbbuf[nbytes] = '\0'; 
-	std::cout << mbbuf;
+	write(STDOUT_FILENO, mbbuf, nbytes);
 }
 
 int main() {
@@ -101,8 +100,8 @@ int main() {
 	int carbonCount = static_cast<int>(prefix);
 	int hydrogenCount;
 	int oxygenCount = 0;
-	int picWidth;
-	int picHeight = 5;
+	unsigned picWidth;
+	unsigned picHeight = 5;
 
 	switch(suffix) {
 	case Suffix::Alkan:
@@ -138,7 +137,7 @@ int main() {
 		exit(0);
 	}
 	
-	std::string formula{};
+	std::string formula;
 	if(suffix == Suffix::Syra) {
 		if(prefix != Prefix::Met)	 {
 			formula = "CH3";
@@ -175,10 +174,10 @@ int main() {
 	if(formula.length() > picWidth)
 		picWidth = formula.length();
 
-	auto pic = new wchar_t*[picHeight];
-	for(int i = 0; i < picHeight; i++) {
+	wchar_t** pic = new wchar_t*[picHeight];
+	for(unsigned i = 0; i < picHeight; i++) {
 		pic[i] = new wchar_t[picWidth];	
-		for(int j = 0; j < picWidth; j++)
+		for(unsigned j = 0; j < picWidth; j++)
 			pic[i][j] = L' ';
 	}
 
@@ -294,29 +293,29 @@ int main() {
 	}
 
 	std::cout << "┌";
-	for(int i = 0; i < picWidth; i++)
+	for(unsigned i = 0; i < picWidth; i++)
 		std::cout << "─";
 	std::cout << "┐\n│" << std::setw(picWidth) << std::left << input << "│\n├";
-	for(int i = 0; i < picWidth; i++)
+	for(unsigned i = 0; i < picWidth; i++)
 		std::cout << "─";
 	std::cout << "┤\n│" << std::setw(picWidth) << formula << "│\n╞";
-	for(int i = 0; i < picWidth; i++)
+	for(unsigned i = 0; i < picWidth; i++)
 		std::cout << "═";
 	std::cout << "╡\n";
 
-	for(int i = 0; i < picHeight; i++) {
+	for(unsigned i = 0; i < picHeight; i++) {
 		std::cout << "│" << std::flush;
-		for(int j = 0; j < picWidth; j++)
+		for(unsigned j = 0; j < picWidth; j++)
 			writeWchar(pic[i][j]);
 		std::cout << "│\n";
 	}
 
 	std::cout << "└";
-	for(int i = 0; i < picWidth; i++)
+	for(unsigned i = 0; i < picWidth; i++)
 		std::cout << "─";
 	std::cout << "┘\n\n";
 
-	for(int i = 0; i < picHeight; i++)
+	for(unsigned i = 0; i < picHeight; i++)
 		delete[] pic[i];
 	delete pic;	
 
