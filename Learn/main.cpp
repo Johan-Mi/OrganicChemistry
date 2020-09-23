@@ -136,7 +136,7 @@ int main() {
 	default:
 		exit(0);
 	}
-	
+
 	std::string formula;
 	if(suffix == Suffix::Syra) {
 		if(prefix != Prefix::Met)	 {
@@ -176,7 +176,7 @@ int main() {
 
 	wchar_t** pic = new wchar_t*[picHeight];
 	for(unsigned i = 0; i < picHeight; i++) {
-		pic[i] = new wchar_t[picWidth];	
+		pic[i] = new wchar_t[picWidth];
 		for(unsigned j = 0; j < picWidth; j++)
 			pic[i][j] = L' ';
 	}
@@ -237,7 +237,7 @@ int main() {
 		}
 		break;
 	}
-	
+
 	case Suffix::Alkohol:
 		pic[2][0] = L'H';
 		pic[2][1] = L'─';
@@ -317,7 +317,7 @@ int main() {
 
 	for(unsigned i = 0; i < picHeight; i++)
 		delete[] pic[i];
-	delete pic;	
+	delete[] pic;
 
 	return 0;
 }
