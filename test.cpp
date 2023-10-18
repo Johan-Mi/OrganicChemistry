@@ -9,8 +9,7 @@
 #include <chrono>
 
 void writeWchar(wchar_t c) {
-	mbstate_t state;
-	memset(&state, 0, sizeof(state));
+	mbstate_t state {};
 	char mbbuf[MB_CUR_MAX + 1];
 	size_t nbytes = wcrtomb(mbbuf, c, &state);
 	mbbuf[nbytes] = '\0';

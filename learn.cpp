@@ -15,8 +15,7 @@
 }
 
 void writeWchar(wchar_t c) {
-	mbstate_t state;
-	memset(&state, 0, sizeof(state));
+	mbstate_t state {};
 	char mbbuf[MB_CUR_MAX];
 	size_t nbytes = wcrtomb(mbbuf, c, &state);
 	write(STDOUT_FILENO, mbbuf, nbytes);
