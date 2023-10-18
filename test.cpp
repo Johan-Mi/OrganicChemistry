@@ -39,9 +39,9 @@ int main() {
 			prefix = static_cast<Prefix>(rng() % 10 + 1);
 
 		if(rand() % 2) {
-			int carbonCount = static_cast<int>(prefix);
-			int hydrogenCount;
-			int oxygenCount = 0;
+			size_t carbonCount = static_cast<int>(prefix);
+			size_t hydrogenCount;
+			size_t oxygenCount = 0;
 
 			switch(suffix) {
 			case Suffix::Alkan:
@@ -98,16 +98,16 @@ int main() {
 			}
 
 			std::cout << "┌";
-			for(int i = 0; i < formula.length(); i++)
+			for(size_t i = 0; i < formula.length(); i++)
 				std::cout << "─";
 			std::cout << "┐\n│" << formula << "│\n└";
-			for(int i = 0; i < formula.length(); i++)
+			for(size_t i = 0; i < formula.length(); i++)
 				std::cout << "─";
 			std::cout << "┘\n\n";
 		} else {
-			int carbonCount = static_cast<int>(prefix);
-			int picWidth;
-			int picHeight = 5;
+			size_t carbonCount = static_cast<size_t>(prefix);
+			size_t picWidth;
+			size_t picHeight = 5;
 
 			switch(suffix) {
 			case Suffix::Alkan:
@@ -132,9 +132,9 @@ int main() {
 			}
 
 			auto pic = new wchar_t*[picHeight];
-			for(int i = 0; i < picHeight; i++) {
+			for(size_t i = 0; i < picHeight; i++) {
 				pic[i] = new wchar_t[picWidth];	
-				for(int j = 0; j < picWidth; j++)
+				for(size_t j = 0; j < picWidth; j++)
 					pic[i][j] = L' ';
 			}
 
@@ -143,7 +143,7 @@ int main() {
 				pic[2][0] = L'H';
 				pic[2][1] = L'─';
 				pic[2][picWidth - 1] = L'H';
-				for(int i = 0; i < 2 * carbonCount; i += 2) {
+				for(size_t i = 0; i < 2 * carbonCount; i += 2) {
 					pic[0][i + 2] = L'H';
 					pic[1][i + 2] = L'│';
 					pic[2][i + 2] = L'C';
@@ -165,7 +165,7 @@ int main() {
 				pic[2][2] = L'C';
 				pic[2][picWidth - 2] = L'─';
 				pic[2][picWidth - 1] = L'H';
-				for(int i = 0; i < 2 * carbonCount - 4; i += 2) {
+				for(size_t i = 0; i < 2 * carbonCount - 4; i += 2) {
 					pic[0][i + 4] = L'H';
 					pic[1][i + 4] = L'│';
 					pic[2][i + 4] = L'C';
@@ -184,7 +184,7 @@ int main() {
 				pic[offset][4] = L'C';
 				pic[offset][picWidth - 2] = L'─';
 				pic[offset][picWidth - 1] = L'H';
-				for(int i = 0; i < 2 * carbonCount - 4; i += 2) {
+				for(size_t i = 0; i < 2 * carbonCount - 4; i += 2) {
 					pic[0][i + 6] = L'H';
 					pic[1][i + 6] = L'│';
 					pic[2][i + 6] = L'C';
@@ -201,7 +201,7 @@ int main() {
 				pic[2][picWidth - 3] = L'O';
 				pic[2][picWidth - 2] = L'─';
 				pic[2][picWidth - 1] = L'H';
-				for(int i = 0; i < 2 * carbonCount; i += 2) {
+				for(size_t i = 0; i < 2 * carbonCount; i += 2) {
 					pic[0][i + 2] = L'H';
 					pic[1][i + 2] = L'│';
 					pic[2][i + 2] = L'C';
@@ -221,7 +221,7 @@ int main() {
 				pic[4][carbonCount * 2] = L'O';
 				pic[4][carbonCount * 2 + 1] = L'─';
 				pic[4][carbonCount * 2 + 2] = L'H';
-				for(int i = 0; i < 2 * carbonCount - 2; i += 2) {
+				for(size_t i = 0; i < 2 * carbonCount - 2; i += 2) {
 					pic[0][i + 2] = L'H';
 					pic[1][i + 2] = L'│';
 					pic[2][i + 2] = L'C';
@@ -236,23 +236,23 @@ int main() {
 			}
 
 			std::cout << "┌";
-			for(int i = 0; i < picWidth; i++)
+			for(size_t i = 0; i < picWidth; i++)
 				std::cout << "─";
 			std::cout << "┐\n";
 
-			for(int i = 0; i < picHeight; i++) {
+			for(size_t i = 0; i < picHeight; i++) {
 				std::cout << "│" << std::flush;
-				for(int j = 0; j < picWidth; j++)
+				for(size_t j = 0; j < picWidth; j++)
 					writeWchar(pic[i][j]);
 				std::cout << "│\n";
 			}
 
 			std::cout << "└";
-			for(int i = 0; i < picWidth; i++)
+			for(size_t i = 0; i < picWidth; i++)
 				std::cout << "─";
 			std::cout << "┘\n\n";
 
-			for(int i = 0; i < picHeight; i++)
+			for(size_t i = 0; i < picHeight; i++)
 				delete[] pic[i];
 			delete[] pic;
 		}

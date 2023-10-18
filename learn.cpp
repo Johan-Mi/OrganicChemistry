@@ -96,11 +96,11 @@ int main() {
 	if(prefix == Prefix::Met && (suffix == Suffix::Alken || suffix == Suffix::Alkyn))
 		fail();
 
-	int carbonCount = static_cast<int>(prefix);
-	int hydrogenCount;
-	int oxygenCount = 0;
-	unsigned picWidth;
-	unsigned picHeight = 5;
+	size_t carbonCount = static_cast<size_t>(prefix);
+	size_t hydrogenCount;
+	size_t oxygenCount = 0;
+	size_t picWidth;
+	size_t picHeight = 5;
 
 	switch(suffix) {
 	case Suffix::Alkan:
@@ -185,7 +185,7 @@ int main() {
 		pic[2][0] = L'H';
 		pic[2][1] = L'─';
 		pic[2][picWidth - 1] = L'H';
-		for(int i = 0; i < 2 * carbonCount; i += 2) {
+		for(size_t i = 0; i < 2 * carbonCount; i += 2) {
 			pic[0][i + 2] = L'H';
 			pic[1][i + 2] = L'│';
 			pic[2][i + 2] = L'C';
@@ -207,7 +207,7 @@ int main() {
 		pic[2][2] = L'C';
 		pic[2][picWidth - 2] = L'─';
 		pic[2][picWidth - 1] = L'H';
-		for(int i = 0; i < 2 * carbonCount - 4; i += 2) {
+		for(size_t i = 0; i < 2 * carbonCount - 4; i += 2) {
 			pic[0][i + 4] = L'H';
 			pic[1][i + 4] = L'│';
 			pic[2][i + 4] = L'C';
@@ -218,7 +218,7 @@ int main() {
 		break;
 
 	case Suffix::Alkyn: {
-		int offset = prefix == Prefix::Et ? 0 : 2;
+		size_t offset = prefix == Prefix::Et ? 0 : 2;
 		pic[offset][0] = L'H';
 		pic[offset][1] = L'─';
 		pic[offset][2] = L'C';
@@ -226,7 +226,7 @@ int main() {
 		pic[offset][4] = L'C';
 		pic[offset][picWidth - 2] = L'─';
 		pic[offset][picWidth - 1] = L'H';
-		for(int i = 0; i < 2 * carbonCount - 4; i += 2) {
+		for(size_t i = 0; i < 2 * carbonCount - 4; i += 2) {
 			pic[0][i + 6] = L'H';
 			pic[1][i + 6] = L'│';
 			pic[2][i + 6] = L'C';
@@ -243,7 +243,7 @@ int main() {
 		pic[2][picWidth - 3] = L'O';
 		pic[2][picWidth - 2] = L'─';
 		pic[2][picWidth - 1] = L'H';
-		for(int i = 0; i < 2 * carbonCount; i += 2) {
+		for(size_t i = 0; i < 2 * carbonCount; i += 2) {
 			pic[0][i + 2] = L'H';
 			pic[1][i + 2] = L'│';
 			pic[2][i + 2] = L'C';
@@ -263,7 +263,7 @@ int main() {
 		pic[4][carbonCount * 2] = L'O';
 		pic[4][carbonCount * 2 + 1] = L'─';
 		pic[4][carbonCount * 2 + 2] = L'H';
-		for(int i = 0; i < 2 * carbonCount - 2; i += 2) {
+		for(size_t i = 0; i < 2 * carbonCount - 2; i += 2) {
 			pic[0][i + 2] = L'H';
 			pic[1][i + 2] = L'│';
 			pic[2][i + 2] = L'C';
@@ -275,7 +275,7 @@ int main() {
 
 	case Suffix::Aldehyd:
 		pic[2][0] = L'H';
-		for(int i = 0; i < 2 * carbonCount; i += 2) {
+		for(size_t i = 0; i < 2 * carbonCount; i += 2) {
 			pic[0][i + 2] = L'H';
 			pic[1][i + 2] = L'│';
 			pic[2][i + 2] = L'C';
