@@ -255,7 +255,7 @@ int main() {
 
 			for(int i = 0; i < picHeight; i++)
 				delete[] pic[i];
-			delete pic;
+			delete[] pic;
 		}
 
 		std::cout << "Gissning: ";
