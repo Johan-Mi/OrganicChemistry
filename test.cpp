@@ -36,7 +36,7 @@ int main() {
             prefix = static_cast<Prefix>(rng() % 10 + 1);
         }
 
-        if (rand() % 2) {
+        if ((rand() % 2) != 0) {
             size_t carbonCount = static_cast<int>(prefix);
             size_t hydrogenCount;
             size_t oxygenCount = 0;
@@ -86,9 +86,11 @@ int main() {
                     formula += std::to_string(carbonCount);
                 }
                 formula += 'H';
-                formula +=
-                    std::to_string(hydrogenCount - (suffix == Suffix::Alkohol));
-                if (oxygenCount) {
+                formula += std::to_string(
+                    hydrogenCount -
+                    static_cast<size_t>(suffix == Suffix::Alkohol)
+                );
+                if (oxygenCount != 0u) {
                     formula += 'O';
                     if (suffix == Suffix::Alkohol) {
                         formula += 'H';

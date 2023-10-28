@@ -166,8 +166,10 @@ int main() {
             formula += std::to_string(carbonCount);
         }
         formula += 'H';
-        formula += std::to_string(hydrogenCount - (suffix == Suffix::Alkohol));
-        if (oxygenCount) {
+        formula += std::to_string(
+            hydrogenCount - static_cast<size_t>(suffix == Suffix::Alkohol)
+        );
+        if (oxygenCount != 0u) {
             formula += 'O';
             if (suffix == Suffix::Alkohol) {
                 formula += 'H';
