@@ -1,12 +1,12 @@
 #include <chrono>
+#include <clocale>
+#include <cstring>
+#include <cwchar>
+#include <cwctype>
 #include <iostream>
-#include <locale.h>
 #include <random>
-#include <string.h>
 #include <string>
 #include <unistd.h>
-#include <wchar.h>
-#include <wctype.h>
 
 void writeWchar(wchar_t c) {
     mbstate_t state{};

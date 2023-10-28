@@ -1,13 +1,13 @@
+#include <clocale>
+#include <cstring>
+#include <cwchar>
+#include <cwctype>
 #include <iomanip>
 #include <iostream>
-#include <locale.h>
-#include <string.h>
 #include <string>
 #include <string_view>
 #include <unistd.h>
 #include <unordered_map>
-#include <wchar.h>
-#include <wctype.h>
 
 [[noreturn]] void fail() {
     std::cout << "Ogiltigt ämne\n\n";
