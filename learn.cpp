@@ -30,8 +30,9 @@ int main() {
     std::cout << '\n';
 
     for (char &c : input) {
-        if (c >= 'A' && c <= 'Z')
+        if (c >= 'A' && c <= 'Z') {
             c += 32;
+        }
     }
     input[0] -= 32;
 
@@ -91,14 +92,16 @@ int main() {
         {"yn", Suffix::Alkyn},    {"anol", Suffix::Alkohol},
         {"ansyra", Suffix::Syra}, {"anal", Suffix::Aldehyd}};
 
-    if (suffixMap.find(inputView) == suffixMap.end())
+    if (suffixMap.find(inputView) == suffixMap.end()) {
         fail();
+    }
 
     suffix = suffixMap.at(inputView);
 
     if (prefix == Prefix::Met &&
-        (suffix == Suffix::Alken || suffix == Suffix::Alkyn))
+        (suffix == Suffix::Alken || suffix == Suffix::Alkyn)) {
         fail();
+    }
 
     size_t carbonCount = static_cast<size_t>(prefix);
     size_t hydrogenCount;
@@ -118,8 +121,9 @@ int main() {
     case Suffix::Alkyn:
         hydrogenCount = 2 * carbonCount - 2;
         picWidth = 2 * carbonCount + 3;
-        if (prefix == Prefix::Et)
+        if (prefix == Prefix::Et) {
             picHeight = 1;
+        }
         break;
     case Suffix::Alkohol:
         hydrogenCount = 2 * carbonCount + 2;
@@ -145,8 +149,9 @@ int main() {
         if (prefix != Prefix::Met) {
             formula = "CH3";
             if (prefix != Prefix::Et) {
-                if (prefix != Prefix::Prop)
+                if (prefix != Prefix::Prop) {
                     formula += '(';
+                }
                 formula += "CH2";
                 if (prefix != Prefix::Prop) {
                     formula += ')';
@@ -157,31 +162,36 @@ int main() {
         formula += "COOH";
     } else {
         formula = "C";
-        if (carbonCount != 1)
+        if (carbonCount != 1) {
             formula += std::to_string(carbonCount);
+        }
         formula += 'H';
         formula += std::to_string(hydrogenCount - (suffix == Suffix::Alkohol));
         if (oxygenCount) {
             formula += 'O';
-            if (suffix == Suffix::Alkohol)
+            if (suffix == Suffix::Alkohol) {
                 formula += 'H';
-            else {
-                if (oxygenCount != 1)
+            } else {
+                if (oxygenCount != 1) {
                     formula += std::to_string(oxygenCount);
+                }
             }
         }
     }
 
-    if (input.length() > picWidth)
+    if (input.length() > picWidth) {
         picWidth = input.length();
-    if (formula.length() > picWidth)
+    }
+    if (formula.length() > picWidth) {
         picWidth = formula.length();
+    }
 
     wchar_t **pic = new wchar_t *[picHeight];
     for (unsigned i = 0; i < picHeight; i++) {
         pic[i] = new wchar_t[picWidth];
-        for (unsigned j = 0; j < picWidth; j++)
+        for (unsigned j = 0; j < picWidth; j++) {
             pic[i][j] = L' ';
+        }
     }
 
     switch (suffix) {
@@ -296,30 +306,36 @@ int main() {
     }
 
     std::cout << "┌";
-    for (unsigned i = 0; i < picWidth; i++)
+    for (unsigned i = 0; i < picWidth; i++) {
         std::cout << "─";
+    }
     std::cout << "┐\n│" << std::setw(picWidth) << std::left << input << "│\n├";
-    for (unsigned i = 0; i < picWidth; i++)
+    for (unsigned i = 0; i < picWidth; i++) {
         std::cout << "─";
+    }
     std::cout << "┤\n│" << std::setw(picWidth) << formula << "│\n╞";
-    for (unsigned i = 0; i < picWidth; i++)
+    for (unsigned i = 0; i < picWidth; i++) {
         std::cout << "═";
+    }
     std::cout << "╡\n";
 
     for (unsigned i = 0; i < picHeight; i++) {
         std::cout << "│" << std::flush;
-        for (unsigned j = 0; j < picWidth; j++)
+        for (unsigned j = 0; j < picWidth; j++) {
             writeWchar(pic[i][j]);
+        }
         std::cout << "│\n";
     }
 
     std::cout << "└";
-    for (unsigned i = 0; i < picWidth; i++)
+    for (unsigned i = 0; i < picWidth; i++) {
         std::cout << "─";
+    }
     std::cout << "┘\n\n";
 
-    for (unsigned i = 0; i < picHeight; i++)
+    for (unsigned i = 0; i < picHeight; i++) {
         delete[] pic[i];
+    }
     delete[] pic;
 
     return 0;

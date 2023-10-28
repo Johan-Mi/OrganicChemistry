@@ -30,10 +30,11 @@ int main() {
         Suffix suffix;
 
         suffix = static_cast<Suffix>(rng() % 5);
-        if (suffix == Suffix::Alken || suffix == Suffix::Alkyn)
+        if (suffix == Suffix::Alken || suffix == Suffix::Alkyn) {
             prefix = static_cast<Prefix>(rng() % 9 + 2);
-        else
+        } else {
             prefix = static_cast<Prefix>(rng() % 10 + 1);
+        }
 
         if (rand() % 2) {
             size_t carbonCount = static_cast<int>(prefix);
@@ -67,8 +68,9 @@ int main() {
                 if (prefix != Prefix::Met) {
                     formula = "CH3";
                     if (prefix != Prefix::Et) {
-                        if (prefix != Prefix::Prop)
+                        if (prefix != Prefix::Prop) {
                             formula += '(';
+                        }
                         formula += "CH2";
                         if (prefix != Prefix::Prop) {
                             formula += ')';
@@ -80,28 +82,32 @@ int main() {
                 formula += "COOH";
             } else {
                 formula = "C";
-                if (carbonCount != 1)
+                if (carbonCount != 1) {
                     formula += std::to_string(carbonCount);
+                }
                 formula += 'H';
                 formula +=
                     std::to_string(hydrogenCount - (suffix == Suffix::Alkohol));
                 if (oxygenCount) {
                     formula += 'O';
-                    if (suffix == Suffix::Alkohol)
+                    if (suffix == Suffix::Alkohol) {
                         formula += 'H';
-                    else {
-                        if (oxygenCount != 1)
+                    } else {
+                        if (oxygenCount != 1) {
                             formula += std::to_string(oxygenCount);
+                        }
                     }
                 }
             }
 
             std::cout << "┌";
-            for (size_t i = 0; i < formula.length(); i++)
+            for (size_t i = 0; i < formula.length(); i++) {
                 std::cout << "─";
+            }
             std::cout << "┐\n│" << formula << "│\n└";
-            for (size_t i = 0; i < formula.length(); i++)
+            for (size_t i = 0; i < formula.length(); i++) {
                 std::cout << "─";
+            }
             std::cout << "┘\n\n";
         } else {
             size_t carbonCount = static_cast<size_t>(prefix);
@@ -117,8 +123,9 @@ int main() {
                 break;
             case Suffix::Alkyn:
                 picWidth = 2 * carbonCount + 3;
-                if (prefix == Prefix::Et)
+                if (prefix == Prefix::Et) {
                     picHeight = 1;
+                }
                 break;
             case Suffix::Alkohol:
                 picWidth = 2 * carbonCount + 5;
@@ -133,8 +140,9 @@ int main() {
             auto pic = new wchar_t *[picHeight];
             for (size_t i = 0; i < picHeight; i++) {
                 pic[i] = new wchar_t[picWidth];
-                for (size_t j = 0; j < picWidth; j++)
+                for (size_t j = 0; j < picWidth; j++) {
                     pic[i][j] = L' ';
+                }
             }
 
             switch (suffix) {
@@ -235,24 +243,28 @@ int main() {
             }
 
             std::cout << "┌";
-            for (size_t i = 0; i < picWidth; i++)
+            for (size_t i = 0; i < picWidth; i++) {
                 std::cout << "─";
+            }
             std::cout << "┐\n";
 
             for (size_t i = 0; i < picHeight; i++) {
                 std::cout << "│" << std::flush;
-                for (size_t j = 0; j < picWidth; j++)
+                for (size_t j = 0; j < picWidth; j++) {
                     writeWchar(pic[i][j]);
+                }
                 std::cout << "│\n";
             }
 
             std::cout << "└";
-            for (size_t i = 0; i < picWidth; i++)
+            for (size_t i = 0; i < picWidth; i++) {
                 std::cout << "─";
+            }
             std::cout << "┘\n\n";
 
-            for (size_t i = 0; i < picHeight; i++)
+            for (size_t i = 0; i < picHeight; i++) {
                 delete[] pic[i];
+            }
             delete[] pic;
         }
 
@@ -261,12 +273,14 @@ int main() {
         std::cin >> input;
 
         for (char &c : input) {
-            if (c >= 'A' && c <= 'Z')
+            if (c >= 'A' && c <= 'Z') {
                 c += 32;
+            }
         }
 
-        if (input == "q")
+        if (input == "q") {
             return 0;
+        }
 
         std::string answer;
 
@@ -325,10 +339,11 @@ int main() {
             break;
         }
 
-        if (input == answer)
+        if (input == answer) {
             std::cout << "Rätt!\n\n";
-        else
+        } else {
             std::cout << "Fel! Rätt svar är " << answer << ".\n\n";
+        }
     }
 
     return 0;
